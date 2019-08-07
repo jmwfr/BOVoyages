@@ -43,6 +43,7 @@ class Voyage
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="voyage", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $reservation;
 

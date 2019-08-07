@@ -30,8 +30,8 @@ class Reservation
     private $client;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\voyage", inversedBy="reservation", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Voyage", inversedBy="reservation", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $voyage;
 

@@ -1,0 +1,15 @@
+App\Entity\Voyage:
+  voyage{1..100}:
+    destinationVoyage: <city()>(<country()>)
+    dateAller: <dateTimeBetween('2019-08-07','2021-01-01')>
+    dateRetour: <dateTimeBetween('2019-08-07','2021-01-01')>
+    nombrePersonnes: <numberBetween(1, 9)>
+    prixVoyage: <randomFloat(2, 600.00, 2500.00)>
+
+
+App\Entity\Client:
+  client{1..30}:
+    nomClient: <lastName()>
+    prenomClient: <firstName()>
+    emailClient: <email()>
+    telClient: <phoneNumber()>
