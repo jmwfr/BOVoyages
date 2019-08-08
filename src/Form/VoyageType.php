@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Voyage;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,12 @@ class VoyageType extends AbstractType
     {
         $builder
             ->add('destinationVoyage')
-            ->add('dateAller')
-            ->add('dateRetour')
+            ->add('dateAller', DateType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('dateRetour', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('nombrePersonnes')
             ->add('prixVoyage')
             ->add('reservation')
