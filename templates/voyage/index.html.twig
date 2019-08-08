@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyages{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col my-5">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Les Voyages</h1>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>DestinationVoyage</th>
+                                <th>DateAller</th>
+                                <th>DateRetour</th>
+                                <th>NombrePersonnes</th>
+                                <th>PrixVoyage</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for voyage in voyages %}
+                                <tr>
+                                    <td>{{ voyage.id }}</td>
+                                    <td>{{ voyage.destinationVoyage }}</td>
+                                    <td>{{ voyage.dateAller ? voyage.dateAller|date('Y-m-d') : '' }}</td>
+                                    <td>{{ voyage.dateRetour ? voyage.dateRetour|date('Y-m-d') : '' }}</td>
+                                    <td>{{ voyage.nombrePersonnes }}</td>
+                                    <td>{{ voyage.prixVoyage }}€</td>
+                                    <td class="text-nowrap">
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_show', {'id': voyage.id}) }}">Afficher</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_new') }}">Nouveau Voyage</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}
