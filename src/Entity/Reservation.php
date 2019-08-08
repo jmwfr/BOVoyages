@@ -19,24 +19,24 @@ class Reservation
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $numCB;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="reservations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="reservations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Voyage", inversedBy="reservation", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Voyage", inversedBy="reservation", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $voyage;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Voyageur", mappedBy="reservation")
+     * @ORM\OneToMany(targetEntity="App\Entity\Voyageur", mappedBy="reservation", cascade={"persist", "remove"})
      */
     private $voyageurs;
 
@@ -50,12 +50,12 @@ class Reservation
         return $this->id;
     }
 
-    public function getNumCB(): ?int
+    public function getNumCB(): ?string
     {
         return $this->numCB;
     }
 
-    public function setNumCB(int $numCB): self
+    public function setNumCB(string $numCB): self
     {
         $this->numCB = $numCB;
 

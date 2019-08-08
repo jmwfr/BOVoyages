@@ -39,7 +39,7 @@ class Voyage
     /**
      * @ORM\Column(type="float")
      */
-    private $prixVoyage;
+        private $prixVoyage;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="voyage", cascade={"persist", "remove"})

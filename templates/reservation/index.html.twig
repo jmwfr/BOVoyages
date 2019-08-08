@@ -8,16 +8,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>NumCB</th>
+                <th>Destination</th>
+                <th>Date Aller</th>
+                <th>Date Retour</th>
+                <th>Nom Client</th>
+                <th>Email Client</th>
+                <th>Tel. Client</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.numCB }}</td>
+                <td>{{ reservation.voyage.destinationVoyage }}</td>
+                <td>{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
+                <td>{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
+                <td>{{ reservation.client.prenomClient }} {{ reservation.client.nomClient }}</td>
+                <td>{{ reservation.client.emailClient }}</td>
+                <td>{{ reservation.client.telClient }}</td>
                 <td>
                     <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>
                     <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
