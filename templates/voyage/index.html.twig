@@ -35,6 +35,7 @@
                                     <td class="text-nowrap">
                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyage_show', {'id': voyage.id}) }}">Afficher</a>
                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_new_id', {'id': voyage.id}) }}">Réserver</a>
                                     </td>
                                 </tr>
                             {% else %}

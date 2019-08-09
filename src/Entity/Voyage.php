@@ -42,7 +42,7 @@ class Voyage
         private $prixVoyage;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="voyage", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", inversedBy="voyage", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $reservation;

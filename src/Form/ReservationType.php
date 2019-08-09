@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Client;
 use App\Entity\Reservation;
 use App\Entity\Voyage;
 use App\Entity\Voyageur;
+use App\Repository\ClientRepository;
 use App\Repository\VoyageRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -27,8 +29,22 @@ class ReservationType extends AbstractType
                     return $repo->getNotReservedBuilder();
                 }
             ])
+            ->add('clients', EntityType::class, [
+                'label' => 'Client',
+                'class' => Client::class,
+                'choice_label' => "clientFullName",
+                'choice_value' => "id",
+                'query_builder' => function(ClientRepository $repo){
+                    return $repo->getBuilderAll();
+                },
+                'mapped' => false,
+                'required' => false,
+                'placeholder' => "Sélectionnez un client"
+            ])
             ->add('client', ClientType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => ['style' => 'display:none' ],
+                'required' => false
             ])
             ->add('numCB', TextType::class, [
                 'label' => 'Numéro de Carte Bleue'
@@ -39,7 +55,7 @@ class ReservationType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
-                'by_reference' => true
+                'mapped' => true
             ])
         ;
     }

@@ -27,7 +27,7 @@ class Voyageur
     private $prenomVoyageur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="voyageurs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="voyageurs", cascade={"persist"})
      */
     private $reservation;
 
