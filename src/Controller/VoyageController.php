@@ -20,8 +20,10 @@ class VoyageController extends AbstractController
      */
     public function index(VoyageRepository $voyageRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('voyage/index.html.twig', [
             'voyages' => $voyageRepository->findAll(),
+            'user' => $user
         ]);
     }
 
@@ -30,6 +32,7 @@ class VoyageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->getUser();
         $voyage = new Voyage();
         $form = $this->createForm(VoyageType::class, $voyage);
         $form->handleRequest($request);
@@ -45,6 +48,7 @@ class VoyageController extends AbstractController
         return $this->render('voyage/new.html.twig', [
             'voyage' => $voyage,
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 

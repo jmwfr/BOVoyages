@@ -14,22 +14,20 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>DestinationVoyage</th>
-                                <th>DateAller</th>
-                                <th>DateRetour</th>
-                                <th>NombrePersonnes</th>
-                                <th>PrixVoyage</th>
-                                <th>actions</th>
+                                <th class="text-center">Destination Voyage</th>
+                                <th class="text-center">Date Aller</th>
+                                <th class="text-center">Date Retour</th>
+                                <th class="text-center">Nombre Personnes</th>
+                                <th class="text-center">Prix Voyage</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for voyage in voyages %}
                                 <tr>
-                                    <td>{{ voyage.id }}</td>
                                     <td>{{ voyage.destinationVoyage }}</td>
-                                    <td>{{ voyage.dateAller ? voyage.dateAller|date('Y-m-d') : '' }}</td>
-                                    <td>{{ voyage.dateRetour ? voyage.dateRetour|date('Y-m-d') : '' }}</td>
+                                    <td>{{ voyage.dateAller ? voyage.dateAller|date('d/m/Y') : '' }}</td>
+                                    <td>{{ voyage.dateRetour ? voyage.dateRetour|date('d/m/Y') : '' }}</td>
                                     <td>{{ voyage.nombrePersonnes }}</td>
                                     <td>{{ voyage.prixVoyage }}€</td>
                                     <td class="text-nowrap">
@@ -51,10 +49,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
 
         </div>
     </div>

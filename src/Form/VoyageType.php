@@ -22,7 +22,6 @@ class VoyageType extends AbstractType
             ])
             ->add('nombrePersonnes')
             ->add('prixVoyage')
-            ->add('reservation')
         ;
     }
 

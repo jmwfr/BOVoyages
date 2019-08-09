@@ -3,9 +3,22 @@
 {% block title %}New Voyageur{% endblock %}
 
 {% block body %}
-    <h1>Create new Voyageur</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col my-5">
+                <div class="card">
+                    <div class="card-header text text-center">
+                        <h1>Create new Voyageur</h1>
+                    </div>
+                    <div class="card-body">
+                        {{ include('voyageur/_form.html.twig') }}
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyageur_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {{ include('voyageur/_form.html.twig') }}
-
-    <a href="{{ path('voyageur_index') }}">back to list</a>
 {% endblock %}

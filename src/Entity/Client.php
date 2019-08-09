@@ -43,6 +43,12 @@ class Client
      */
     private $reservations;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -136,4 +142,20 @@ class Client
     {
         return $this->getPrenomClient()." ".$this->getNomClient();
     }
+
+    /**
+     * @return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+
 }

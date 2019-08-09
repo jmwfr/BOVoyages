@@ -6,6 +6,11 @@ App\Entity\Voyage:
     nombrePersonnes: <numberBetween(1, 9)>
     prixVoyage: <randomFloat(2, 600.00, 2500.00)>
 
+App\Entity\User:
+  user_1:
+    username: 'user1'
+    plainPassword: '123456789'
+    password: '\$2y\$13\$W1LSMG9ZFslPepE/VZDMfOqBhfiKZlmSVadpQGkauCE6iqtkIEc2i'
 
 App\Entity\Client:
   client{1..30}:
