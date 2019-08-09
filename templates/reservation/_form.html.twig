@@ -3,14 +3,14 @@
     {{ form_row(form.voyage, {'value' : voyageId}) }}
     {{ form_row(form.clients) }}
     <div class="form-group">
-        <button type="button" id="addClient" class="btn btn-primary">Ajouter Client</button>
+        <button type="button" id="addClient" class="btn btn-secondary">Ajouter Client</button>
     </div>
     {{ form_row(form.client) }}
     {{ form_row(form.numCB) }}
     {{ form_row(form.voyageurs) }}
     <div class="form-group">
-        <button type="button" id="addVoyageur" class="btn btn-primary">Ajouter Voyageur</button>
+        <button type="button" id="addVoyageur" class="btn btn-secondary">Ajouter Voyageur</button>
     </div>
     {{ form_rest(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
