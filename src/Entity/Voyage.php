@@ -42,9 +42,9 @@ class Voyage
         private $prixVoyage;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", inversedBy="voyage", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
+ * @ORM\OneToOne(targetEntity="App\Entity\Reservation", inversedBy="voyage", cascade={"persist", "remove"})
+ * @ORM\JoinColumn(nullable=true)
+ */
     private $reservation;
 
     public function getId(): ?int

@@ -5,48 +5,50 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-         <div class="col my-5">
-             <div class="card">
-                 <div class="card-header text-center">
-                     <h1>Voyageur</h1>
+            <div class="col my-5">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Voyageur</h1>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for voyageur in voyageurs %}
+                                <tr>
+                                    <td>{{ voyageur.nomVoyageur }}</td>
+                                    <td>{{ voyageur.prenomVoyageur }}</td>
+                                    <td>
+                                        <div class="card-footer text-center">
+                                            <a class="btn btn-secondary btn-custom"
+                                               href="{{ path('voyageur_show', {'id': voyageur.id}) }}">Afficher</a>
+                                            <a class="btn btn-secondary btn-custom"
+                                               href="{{ path('voyageur_edit', {'id': voyageur.id}) }}">Modifier</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyageur_new') }}">Nouveau Voyageur</a>
+                    </div>
+                </div>
 
-                     <table class="table">
-                         <thead>
-                         <tr>
-                             <th>Id</th>
-                             <th>Nom</th>
-                             <th>Prenom</th>
-                             <th>actions</th>
-                         </tr>
-                         </thead>
-                         <tbody>
-                         {% for voyageur in voyageurs %}
-                             <tr>
-                                 <td>{{ voyageur.id }}</td>
-                                 <td>{{ voyageur.nomVoyageur }}</td>
-                                 <td>{{ voyageur.prenomVoyageur }}</td>
-                                 <td>
-                                     <div class="card-footer text-center">
-                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyageur_show', {'id': voyageur.id}) }}">Afficher</a>
-                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyageur_edit', {'id': voyageur.id}) }}">Modifier</a>
-                                     </div>
-                                 </td>
-                             </tr>
-                         {% else %}
-                             <tr>
-                                 <td colspan="4">no records found</td>
-                             </tr>
-                         {% endfor %}
-                         </tbody>
-                     </table>
-                     <div class="card-footer text-center">
-                         <a class="btn btn-secondary btn-custom" href="{{ path('voyageur_new') }}">Nouveau Voyageur</a>
-                     </div>
-                 </div>
-
-             </div>
-         </div>
+            </div>
         </div>
+    </div>
 
     </div>
 

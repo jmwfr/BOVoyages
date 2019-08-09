@@ -16,23 +16,21 @@
 
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>NomClient</th>
-                                <th>PrenomClient</th>
-                                <th>TelClient</th>
-                                <th>EmailClient</th>
-                                <th>actions</th>
+                                <th class="text-center">Nom Client</th>
+                                <th class="text-center">Prénom Client</th>
+                                <th class="text-center">Tel. Client</th>
+                                <th class="text-center">Email Client</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for client in clients %}
                                 <tr>
-                                    <td>{{ client.id }}</td>
                                     <td>{{ client.nomClient }}</td>
                                     <td>{{ client.prenomClient }}</td>
                                     <td>{{ client.telClient }}</td>
                                     <td>{{ client.emailClient }}</td>
-                                    <td class="text-nowrap">
+                                    <td class="text-nowrap text-center">
                                         <a class="btn btn-secondary btn-custom" href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
                                         <a class="btn btn-secondary btn-custom" href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
                                     </td>
