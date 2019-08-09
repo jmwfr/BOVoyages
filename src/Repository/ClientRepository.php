@@ -47,4 +47,8 @@ class ClientRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getBuilderAll() {
+        return $this->createQueryBuilder('c');
+    }
 }

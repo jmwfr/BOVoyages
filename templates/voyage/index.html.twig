@@ -28,13 +28,14 @@
                                 <tr>
                                     <td>{{ voyage.id }}</td>
                                     <td>{{ voyage.destinationVoyage }}</td>
-                                    <td>{{ voyage.dateAller ? voyage.dateAller|date('Y-m-d') : '' }}</td>
-                                    <td>{{ voyage.dateRetour ? voyage.dateRetour|date('Y-m-d') : '' }}</td>
+                                    <td>{{ voyage.dateAller ? voyage.dateAller|date('d/m/Y') : '' }}</td>
+                                    <td>{{ voyage.dateRetour ? voyage.dateRetour|date('d/m/Y') : '' }}</td>
                                     <td>{{ voyage.nombrePersonnes }}</td>
                                     <td>{{ voyage.prixVoyage }}€</td>
                                     <td class="text-nowrap">
                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyage_show', {'id': voyage.id}) }}">Afficher</a>
                                         <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_new_id', {'id': voyage.id}) }}">Réserver</a>
                                     </td>
                                 </tr>
                             {% else %}

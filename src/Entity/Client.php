@@ -131,4 +131,9 @@ class Client
 
         return $this;
     }
+
+    public function getClientFullName(): string
+    {
+        return $this->getPrenomClient()." ".$this->getNomClient();
+    }
 }

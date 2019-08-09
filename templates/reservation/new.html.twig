@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation{% endblock %}
+{% block title %}Nouvelle Reservation{% endblock %}
 
 {% block body %}
-    <h1>Create new Reservation</h1>
+    <h1>Créer une Reservation</h1>
 
     {{ include('reservation/_form.html.twig') }}
 
@@ -28,6 +28,21 @@
 
             $voyageursCollectionHolder.delegate('.delete', 'click', function () {
                 $(this).parent().remove();
+            })
+
+            $('#addClient').click(function () {
+                if($(this).text() === "Ajouter Client") {
+                    $("#reservation_client").attr("style","display:block");
+                    $("#reservation_clients").attr("style","display:none");
+                    $(this).text("Sélectionner Client");
+                }
+                else
+                {
+                    $("#reservation_client").attr("style","display:none");
+                    $("#reservation_clients").attr("style","display:block");
+                    $(this).text("Ajouter Client");
+                }
+
             })
         })
     </script>

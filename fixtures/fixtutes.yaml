@@ -12,4 +12,4 @@ App\Entity\Client:
     nomClient: <lastName()>
     prenomClient: <firstName()>
     emailClient: <email()>
-    telClient: <phoneNumber()>
+    telClient: <e164PhoneNumber()>

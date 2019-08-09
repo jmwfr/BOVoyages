@@ -1,5 +1,10 @@
 {{ form_start(form) }}
-    {{ form_row(form.voyage) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.voyage, {'value' : voyageId}) }}
+    {{ form_row(form.clients) }}
+    <div class="form-group">
+        <button type="button" id="addClient" class="btn btn-primary">Ajouter Client</button>
+    </div>
     {{ form_row(form.client) }}
     {{ form_row(form.numCB) }}
     {{ form_row(form.voyageurs) }}

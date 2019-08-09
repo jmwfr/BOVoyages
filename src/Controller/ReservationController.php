@@ -8,6 +8,7 @@ use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use App\Repository\VoyageurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,34 +30,51 @@ class ReservationController extends AbstractController
 
     /**
      * @Route("/new", name="reservation_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="reservation_new_id", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, string $id = null): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $reservation = new Reservation();
+
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            dump($request->request->get("reservation"));
-
-            $voyageurs = $reservation->getVoyageurs();
-
-            foreach($voyageurs as $voyageur) {
-                $voyageur->setReservation($reservation);
+            dump($_POST["reservation"]);
+            if (is_null($reservation->getClient()) && empty($_POST['reservation']["clients"]))
+            {
+                $form->addError(new FormError("Veuillez sélectionner un client ou en ajouter un !"));
             }
+            else
+            {
+                if (is_null($reservation->getClient())) {
+                    $clientId = (int)$_POST['reservation']["clients"];
+                    $repo = $entityManager->getRepository("App\Entity\Client");
+                    $client = $repo->findOneBy(["id" => $clientId]);
+                    $reservation->setClient($client);
+                }
 
-            $reservation->getVoyage()->setReservation($reservation);
+                $voyageurs = $reservation->getVoyageurs();
 
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+                foreach ($voyageurs as $voyageur) {
+                    $voyageur->setReservation($reservation);
+                }
 
-            return $this->redirectToRoute('reservation_index');
+                $reservation->getVoyage()->setReservation($reservation);
+
+                $entityManager->persist($reservation);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('reservation_index');
+            }
         }
 
         return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
+            'voyageId' => $id
         ]);
     }
 
@@ -95,7 +113,7 @@ class ReservationController extends AbstractController
      */
     public function delete(Request $request, Reservation $reservation): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reservation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reservation->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($reservation);
             $entityManager->flush();
