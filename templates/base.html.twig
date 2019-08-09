@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('css/app') }}
-        {% endblock %}
-    </head>
-    <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">LOGO</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ path('home') }}">BOVoyages</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">INFOS</a>
-                </li>
+    <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('home') }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('voyage_index') }}">Nos Voyages</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') and user.client == null %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownResa" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Résevations</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownResa">
+                    <a class="dropdown-item" href="{{ path('reservation_index') }}">Liste Réservations</a>
+                    <a class="dropdown-item" href="{{ path('reservation_new') }}">Créer Réservation</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownVoyage" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Voyages</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownVoyage">
+                    <a class="dropdown-item" href="{{ path('voyage_index') }}">Liste Voyages</a>
+                    <a class="dropdown-item" href="{{ path('voyage_new') }}">Ajouter Voyage</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownClient" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Clients</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownClient">
+                    <a class="dropdown-item" href="{{ path('client_index') }}">Liste Clients</a>
+                    <a class="dropdown-item" href="{{ path('client_new') }}">Ajouter Client</a>
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="float-right position-absolute" style="right: 15px">
+                <a class="nav-item nav-item-custom" href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% else %}
+            <div class="float-right position-absolute" style="right: 15px">
+                <a class="nav-item nav-item-custom" href="{{ path('user_registration') }}">Inscription</a>
+                <a class="nav-item nav-item-custom" href="{{ path('app_login') }}">Login</a>
+            </div>
+        {%  endif %}
+    </div>
+</nav>
+{% block body %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('voyage_index') }}">Nos Voyages</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">CONTACT</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">RESERVATION</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{{ path('reservation_new') }}">Faire une Réservation</a>
-                        <a class="dropdown-item" href="{{ path('client_new') }}">Créer un Client</a>
-                        <a class="dropdown-item" href="{{ path('voyage_new') }}">Creer un Voyage</a>
-                    </div>
-                </li>
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-        {% block body %}
-
-
-        {% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('js/app') }}
-        {% endblock %}
-    </body>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}
+</body>
 </html>

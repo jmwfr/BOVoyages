@@ -14,3 +14,13 @@ body {
 .btn-custom {
     color:white;
 }
+
+.nav-item-custom {
+    color:rgba(255, 255, 255, 0.5);
+    margin-left: 5px;
+}
+
+.nav-item-custom:hover {
+    color:rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
