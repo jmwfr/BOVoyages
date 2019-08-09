@@ -23,8 +23,10 @@ class ReservationController extends AbstractController
      */
     public function index(ReservationRepository $reservationRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservationRepository->findAll(),
+            'user' => $user
         ]);
     }
 
@@ -34,6 +36,7 @@ class ReservationController extends AbstractController
      */
     public function new(Request $request, string $id = null): Response
     {
+        $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
         $reservation = new Reservation();
 
@@ -42,7 +45,7 @@ class ReservationController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($_POST["reservation"]);
+            //dump($_POST["reservation"]);
             if (is_null($reservation->getClient()) && empty($_POST['reservation']["clients"]))
             {
                 $form->addError(new FormError("Veuillez sélectionner un client ou en ajouter un !"));
@@ -74,7 +77,8 @@ class ReservationController extends AbstractController
         return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
-            'voyageId' => $id
+            'voyageId' => $id,
+            'user' => $user
         ]);
     }
 

@@ -1,7 +1,7 @@
 body {
     /*background-color: purple;*/
 
-    color: rebeccapurple!important;
+    color: darkslategray!important;
 }
 
 .table {
@@ -14,13 +14,18 @@ body {
 .btn-custom {
     color:white;
 }
+.jumbotron{
+    background-image: url(/img/banner.jpg);
+    min-height: 300px;
+    background-size: cover;
+}
 
 .nav-item-custom {
-    color:rgba(255, 255, 255, 0.5);
+    color:rgba(0, 0, 0, 0.5);
     margin-left: 5px;
 }
 
 .nav-item-custom:hover {
-    color:rgba(255, 255, 255, 1);
+    color:rgba(0, 0, 0, 1);
     text-decoration: none;
 }

@@ -8,7 +8,7 @@
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-light bg-info">
     <a class="navbar-brand" href="{{ path('home') }}">BOVoyages</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,6 +23,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('voyage_index') }}">Nos Voyages</a>
             </li>
+
             {% if is_granted('IS_AUTHENTICATED_FULLY') and user.client == null %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdownResa" data-toggle="dropdown"
