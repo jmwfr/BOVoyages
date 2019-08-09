@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Voyageur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +15,6 @@ class VoyageurType extends AbstractType
         $builder
             ->add('nomVoyageur')
             ->add('prenomVoyageur')
-            ->add('reservation')
         ;
     }
 

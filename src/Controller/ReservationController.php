@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\Voyageur;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use App\Repository\VoyageurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +38,16 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            dump($request->request->get("reservation"));
+
+            $voyageurs = $reservation->getVoyageurs();
+
+            foreach($voyageurs as $voyageur) {
+                $voyageur->setReservation($reservation);
+            }
+
+            $reservation->getVoyage()->setReservation($reservation);
+
             $entityManager->persist($reservation);
             $entityManager->flush();
 

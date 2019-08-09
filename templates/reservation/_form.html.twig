@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.voyage) }}
+    {{ form_row(form.client) }}
+    {{ form_row(form.numCB) }}
+    {{ form_row(form.voyageurs) }}
+    <div class="form-group">
+        <button type="button" id="addVoyageur" class="btn btn-primary">Ajouter Voyageur</button>
+    </div>
+    {{ form_rest(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reservation{% endblock %}
+{% block title %}Reservation{% endblock %}
 
 {% block body %}
     <h1>Create new Reservation</h1>
@@ -8,4 +8,27 @@
     {{ include('reservation/_form.html.twig') }}
 
     <a href="{{ path('reservation_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            let $voyageursCollectionHolder = $("#reservation_voyageurs");
+            let $voyageurTemplate = $voyageursCollectionHolder.data('prototype');
+            let voyageurIndex = $voyageursCollectionHolder.children().length;
+
+            $('#addVoyageur').click(function () {
+                let newVoyageur = $($voyageurTemplate.replace(/__name__/g, voyageurIndex++));
+                newVoyageur.addClass('border-bottom pb-2');
+                let deleteButton = $('<button type="button" class="btn btn-danger float-right delete">Delete</button>')
+                newVoyageur.append(deleteButton);
+                $voyageursCollectionHolder.append(newVoyageur);
+            });
+
+            $voyageursCollectionHolder.delegate('.delete', 'click', function () {
+                $(this).parent().remove();
+            })
+        })
+    </script>
 {% endblock %}
