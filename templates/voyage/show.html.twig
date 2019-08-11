@@ -4,50 +4,53 @@
 
 {% block body %}
     <div class="container-fluid">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-3">
             <div class="col-8 my-4">
                 <div class="card">
                     <div class="card-header text-center">
-                    <h1>Voyage</h1>
-                </div>
-
+                        <h1>Voyage</h1>
+                    </div>
+                    <div class="card-body">
                         <table class="table table-bordered table-striped">
-                        <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ voyage.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>DestinationVoyage</th>
-                            <td>{{ voyage.destinationVoyage }}</td>
-                        </tr>
-                        <tr>
-                            <th>DateAller</th>
-                            <td>{{ voyage.dateAller ? voyage.dateAller|date('Y-m-d') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>DateRetour</th>
-                            <td>{{ voyage.dateRetour ? voyage.dateRetour|date('Y-m-d') : '' }}</td>
-                        </tr>
-                        <tr>
-                            <th>NombrePersonnes</th>
-                            <td>{{ voyage.nombrePersonnes }}</td>
-                        </tr>
-                        <tr>
-                            <th>PrixVoyage</th>
-                            <td>{{ voyage.prixVoyage }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ voyage.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pays Destination</th>
+                                <td>{{ voyage.destinationCountry }}</td>
+                            </tr>
+                            <tr>
+                                <th>Ville Destination</th>
+                                <td>{{ voyage.destinationCity }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date Aller</th>
+                                <td>{{ voyage.dateAller ? voyage.dateAller|date('d/m/Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date Retour</th>
+                                <td>{{ voyage.dateRetour ? voyage.dateRetour|date('d/m/Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre Personnes</th>
+                                <td>{{ voyage.nombrePersonnes }}</td>
+                            </tr>
+                            <tr>
+                                <th>Prix Voyage</th>
+                                <td>{{ voyage.prixVoyage }}€</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div>
                         <div class="card-footer text-center">
-                            <a class="btn btn-secondary btn-custom" href="{{ path('voyage_index') }}">Retour</a>
-                            <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                            <a class="btn btn-secondary btn-custom" href="{{ path('voyage_index') }}">Retour Liste <i class="fas fa-undo-alt"></i></a>
+                            <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier <i class="fas fa-pencil-alt"></i></a>
                             {{ include('voyage/_delete_form.html.twig') }}
                         </div>
                     </div>
-
-
 
 
                 </div>

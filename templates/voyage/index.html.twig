@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col my-5">
+            <div class="col mt-3">
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>Les Voyages</h1>
@@ -14,7 +14,8 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th class="text-center">Destination Voyage</th>
+                                <th class="text-center">Pays de Destination</th>
+                                <th class="text-center">Ville de Destination</th>
                                 <th class="text-center">Date Aller</th>
                                 <th class="text-center">Date Retour</th>
                                 <th class="text-center">Nombre Personnes</th>
@@ -25,14 +26,15 @@
                             <tbody>
                             {% for voyage in voyages %}
                                 <tr>
-                                    <td>{{ voyage.destinationVoyage }}</td>
+                                    <td>{{ voyage.destinationCountry }}</td>
+                                    <td>{{ voyage.destinationCity }}</td>
                                     <td>{{ voyage.dateAller ? voyage.dateAller|date('d/m/Y') : '' }}</td>
                                     <td>{{ voyage.dateRetour ? voyage.dateRetour|date('d/m/Y') : '' }}</td>
                                     <td>{{ voyage.nombrePersonnes }}</td>
                                     <td>{{ voyage.prixVoyage }}€</td>
                                     <td class="text-nowrap">
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_show', {'id': voyage.id}) }}">Afficher</a>
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_show', {'id': voyage.id}) }}"><i class="fas fa-search"></i> Afficher</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_edit', {'id': voyage.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a>
                                         <a class="btn btn-secondary btn-custom" href="{{ path('reservation_new_id', {'id': voyage.id}) }}">Réserver</a>
                                     </td>
                                 </tr>
@@ -45,7 +47,7 @@
                         </table>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_new') }}">Nouveau Voyage</a>
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_new') }}"><i class="fa fa-plus-circle"></i> Nouveau Voyage</a>
                     </div>
                 </div>
             </div>

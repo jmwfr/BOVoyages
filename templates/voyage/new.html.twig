@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-8 my-4">
+            <div class="col-8 mt-3">
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>Create new Voyage</h1>
@@ -13,8 +13,8 @@
                     <div class="card-body">
                         {{ include('voyage/_form.html.twig') }}
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_index') }}">Retour</a>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_index') }}">&laquo; Retour</a>
                     </div>
                     </div>
                 </div>

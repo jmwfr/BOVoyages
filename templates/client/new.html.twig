@@ -4,22 +4,21 @@
 
 {% block body %}
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-8 my-4">
-            <div class="card">
-                <div class="card-header text-center">
-                    <h1>Create new Client</h1>
-                </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 my-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Create new Client</h1>
+                    </div>
                     <div class="card-body">
-                     {{ include('client/_form.html.twig') }}
+                        {{ include('client/_form.html.twig') }}
                     </div>
                     <div class="card-footer text-center">
-                    <a class="btn btn-secondary btn-custom" href="{{ path('client_index') }}">Retour</a>
+                        <a class="btn btn-secondary btn-custom" href="{{ path('client_index') }}">Retour</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

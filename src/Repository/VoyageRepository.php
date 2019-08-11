@@ -51,6 +51,16 @@ class VoyageRepository extends ServiceEntityRepository
     public function findAllNotReserved() {
         return $this->createQueryBuilder('v')
             ->andWhere('v.reservation is null')
+            ->orderBy('v.destinationCountry')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findLastTwelveNotReserved() {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.reservation is null')
+            ->orderBy('v.id', 'desc')
+            ->setMaxResults(12)
             ->getQuery()
             ->getResult();
     }
@@ -58,5 +68,9 @@ class VoyageRepository extends ServiceEntityRepository
     public function getNotReservedBuilder() {
         return $this->createQueryBuilder('v')
             ->andWhere('v.reservation is null');
+    }
+
+    public function getAlldBuilder() {
+        return $this->createQueryBuilder('v');
     }
 }

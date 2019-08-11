@@ -5,15 +5,13 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col my-5">
+            <div class="col mt-3">
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>Liste des Clients</h1>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
-
-
                             <thead>
                             <tr>
                                 <th class="text-center">Nom Client</th>
@@ -31,8 +29,10 @@
                                     <td>{{ client.telClient }}</td>
                                     <td>{{ client.emailClient }}</td>
                                     <td class="text-nowrap text-center">
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('client_show', {'id': client.id}) }}">Afficher</a>
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-custom"
+                                           href="{{ path('client_show', {'id': client.id}) }}"><i class="fas fa-search"></i> Afficher</a>
+                                        <a class="btn btn-secondary btn-custom"
+                                           href="{{ path('client_edit', {'id': client.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -44,7 +44,7 @@
                         </table>
                     </div>
                     <div class="card-footer text-center">
-                        <a class="btn btn-secondary btn-custom" href="{{ path('client_new') }}">Nouveau Client</a>
+                        <a class="btn btn-secondary btn-custom" href="{{ path('client_new') }}"><i class="fa fa-plus-circle"></i> Nouveau Client</a>
                     </div>
                 </div>
             </div>

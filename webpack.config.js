@@ -25,6 +25,7 @@ Encore
      */
     .addEntry("js/app", [
 		"./node_modules/jquery/dist/jquery.min.js",
+		"./node_modules/jquery-ui/ui/effects/effect-fade.js",
 		"./node_modules/bootstrap/dist/js/bootstrap.js",
 		"./node_modules/popper.js/dist/umd/popper.js",
 		"./assets/js/app.js"

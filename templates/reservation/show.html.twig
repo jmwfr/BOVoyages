@@ -3,74 +3,88 @@
 {% block title %}Reservation{% endblock %}
 
 {% block body %}
-    <h1>Reservation</h1>
-
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Voyage</th>
-            <td>{{ reservation.voyage.destinationVoyage }}</td>
-        </tr>
-        <tr>
-            <th>Date Aller</th>
-            <td>{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Date Retour</th>
-            <td>{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Nombre Personnes</th>
-            <td>{{ reservation.voyage.nombrePersonnes }}</td>
-        </tr>
-        <tr>
-            <th>Prix</th>
-            <td>{{ reservation.voyage.prixVoyage }}€</td>
-        </tr>
-        <tr>
-            <th>Client</th>
-            <td>{{ reservation.client.prenomClient }} {{ reservation.client.nomClient }}</td>
-        </tr>
-        <tr>
-            <th>E-mail Client</th>
-            <td>{{ reservation.client.emailClient }}</td>
-        </tr>
-        <tr>
-            <th>Tel. Client</th>
-            <td>{{ reservation.client.telClient }}</td>
-        </tr>
-        <tr>
-            <th>Numéro Carte Bleue</th>
-            <td>{{ reservation.numCB }}</td>
-        </tr>
-        <tr>
-            <th>Voyageurs</th>
-            <td>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Prénom Voyageur</th>
-                        <th>Nom Voyageur</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for voyageur in reservation.voyageurs %}
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-5">
+            <div class="col-8">
+                <div class="card">
+                <div class="card-header text-center">
+                    <h1>Réservation</h1>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <tbody>
                         <tr>
-                            <td>{{ voyageur.prenomVoyageur }}</td>
-                            <td>{{ voyageur.nomVoyageur }}</td>
+                            <th>Pays Voyage</th>
+                            <td>{{ reservation.voyage.destinationCountry }}</td>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
-
-    <a href="{{ path('reservation_index') }}">back to list</a>
-
-    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}">edit</a>
-
-    {{ include('reservation/_delete_form.html.twig') }}
+                        <tr>
+                            <th>Ville Voyage</th>
+                            <td>{{ reservation.voyage.destinationCity }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date Aller</th>
+                            <td>{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date Retour</th>
+                            <td>{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre Personnes</th>
+                            <td>{{ reservation.voyage.nombrePersonnes }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ reservation.voyage.prixVoyage }}€</td>
+                        </tr>
+                        <tr>
+                            <th>Client</th>
+                            <td>{{ reservation.client.prenomClient }} {{ reservation.client.nomClient }}</td>
+                        </tr>
+                        <tr>
+                            <th>E-mail Client</th>
+                            <td>{{ reservation.client.emailClient }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tel. Client</th>
+                            <td>{{ reservation.client.telClient }}</td>
+                        </tr>
+                        <tr>
+                            <th>Numéro Carte Bleue</th>
+                            <td>{{ reservation.numCB }}</td>
+                        </tr>
+                        <tr>
+                            <th>Voyageurs</th>
+                            <td>
+                                <table class="table table-bordered table-striped table-secondary">
+                                    <thead>
+                                        <tr>
+                                            <th>Prénom Voyageur</th>
+                                            <th>Nom Voyageur</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for voyageur in reservation.voyageurs %}
+                                        <tr>
+                                            <td>{{ voyageur.prenomVoyageur }}</td>
+                                            <td>{{ voyageur.nomVoyageur }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-nowrap text-center">
+                    <a class="btn btn-secondary btn-custom" href="{{ path('reservation_index') }}">Retour <i class="fas fa-undo-alt"></i></a>
+                    <a class="btn btn-secondary btn-custom"
+                       href="{{ path('reservation_edit', {'id': reservation.id}) }}">Editer <i class="fas fa-pencil-alt"></i></a>
+                    {{ include('reservation/_delete_form.html.twig') }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

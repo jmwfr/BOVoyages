@@ -1,6 +1,9 @@
 App\Entity\Voyage:
   voyage{1..100}:
-    destinationVoyage: <city()>(<country()>)
+    image: /img/voyage/voyage<numberBetween(1, 22)>.jpg
+    destinationCountry: <country()>
+    destinationCity: <city()>
+    description: <sentences(3, true)>
     dateAller: <dateTimeBetween('2019-08-07','2021-01-01')>
     dateRetour: <dateTimeBetween('2019-08-07','2021-01-01')>
     nombrePersonnes: <numberBetween(1, 9)>
@@ -8,9 +11,10 @@ App\Entity\Voyage:
 
 App\Entity\User:
   user_1:
-    username: 'user1'
+    username: 'root'
     plainPassword: '123456789'
     password: '\$2y\$13\$W1LSMG9ZFslPepE/VZDMfOqBhfiKZlmSVadpQGkauCE6iqtkIEc2i'
+    roles: ['ROLE_ADMIN']
 
 App\Entity\Client:
   client{1..30}:

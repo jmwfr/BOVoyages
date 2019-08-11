@@ -1,76 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home!{% endblock %}
+{% block title %}BOVoyages | Bienvenue{% endblock %}
 
 {% block body %}
-    {{ parent() }}
-    <main role="main">
-
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="container">
-
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="jumbotron mx-3 mb-3 w-100"></div>
+            <div class="justify-content-center text-center w-100">
+                <h1> Par ici les bons plans ! </h1>
             </div>
         </div>
-        <div class="justify-content-center text-center">
-            <h1> Par ici les bons plans ! </h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for voyage in voyages %}
+                <div class="col-md-4 text-center my-3">
+                    <div class="card shadow h-100">
+                        <div class="card-body">
+                            <h2>{{ voyage.destinationCountry }}</h2>
+                            <img src="{{ voyage.image }}" class="my-2"/>
+                            <h4>{{ voyage.destinationCity }}</h4>
+                            <p>{{ voyage.description }}</p>
+                            <p><a class="btn btn-secondary" href="{{ path('voyage_showClient', { id: voyage.id }) }}"
+                                  role="button">Voir details &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <h2>Ville</h2>
-
-                    <img src="{{ asset('img/coline.jpg') }}"/>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h2>Montagne </h2>
-
-                    <img src="{{ asset('img/mount.jpg') }}"/>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h2>Desert</h2>
-                    <img src="{{ asset('img/desert.jpg') }}"/>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row">
-                <div class="col-md-4 text-center">
-
-
-                    <img src="{{ asset('img/wfalls.jpg') }}"/>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-                <div class="col-md-4 text-center">
-
-
-                    <img src="{{ asset('img/voyage3.jpg') }}"/>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-                <div class="col-md-4 text-center">
-
-                    <img src="{{ asset('img/montangne3.jpg') }}"/>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Voir details &raquo;</a></p>
-                </div>
-            </div>
-            <hr>
-
-        </div> <!-- /container -->
-
-    </main>
-
-    <footer class="container">
-        <p>&copy; Company 2017-2018</p>
-    </footer>
+    </div>
 {% endblock %}

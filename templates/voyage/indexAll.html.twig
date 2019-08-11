@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+        <h1>Tous nos voyages</h1>
+    </div>
+    <div class="row justify-content-center">
+        {% for voyage in voyages %}
+            <div class="col-3 my-3">
+                <div class="card h-100 shadow">
+                    <div class="card-header text-center voyage-card-header" style="background-image: url('{{ voyage.image }}');">
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h3>{{ voyage.destinationCountry }}</h3>
+                            <h4>{{ voyage.destinationCity }}</h4>
+                        </div>
+                        <hr>
+                        <div class="text-center"><em>Nb. Max. Personnes :</em> <strong>{{ voyage.nombrePersonnes }}</strong></div>
+                        <div class="text-center"><em>Du :</em> <strong>{{ voyage.dateAller | date('d/m/Y') }}</strong> <em>au</em> <strong>{{ voyage.dateRetour | date('d/m/Y') }}</strong> </div>
+                        <div class="text-center"><em>Prix :</em><strong>{{ voyage.prixVoyage }}€</strong></div>
+                        <hr>
+                        <div  class="text-justify">{{ voyage.description }}</div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('voyage_showClient', { id: voyage.id }) }}">Voir détails &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block title %}
+    Nos Voyages
+{% endblock %}
+

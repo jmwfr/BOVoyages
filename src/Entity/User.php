@@ -38,7 +38,6 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="user", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
 

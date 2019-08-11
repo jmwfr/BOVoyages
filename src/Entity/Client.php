@@ -44,7 +44,7 @@ class Client
     private $reservations;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="client", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;

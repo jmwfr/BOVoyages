@@ -23,10 +23,12 @@ class ReservationType extends AbstractType
         $builder
             ->add('voyage', EntityType::class, [
                 'class' => Voyage::class,
-                'choice_label' => "destinationVoyage",
+                'choice_label' => function($voyage) {
+                    return $voyage->getDestinationCountry()." (".$voyage->getDestinationCity().")";
+                },
                 'choice_value' => "id",
                 'query_builder' => function(VoyageRepository $repo) {
-                    return $repo->getNotReservedBuilder();
+                    return $repo->getAlldBuilder();
                 }
             ])
             ->add('clients', EntityType::class, [

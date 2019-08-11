@@ -17,9 +17,24 @@ class Voyage
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $destinationVoyage;
+    private $destinationCountry;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $destinationCity;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="date")
@@ -52,15 +67,50 @@ class Voyage
         return $this->id;
     }
 
-    public function getDestinationVoyage(): ?string
+    /**
+     * @return mixed
+     */
+    public function getImage(): ?string
     {
-        return $this->destinationVoyage;
+        return $this->image;
     }
 
-    public function setDestinationVoyage(string $destinationVoyage): self
+    public function setImage($image): self
     {
-        $this->destinationVoyage = $destinationVoyage;
+        $this->image = $image;
+        return $this;
+    }
 
+    public function getDestinationCountry(): ?string
+    {
+        return $this->destinationCountry;
+    }
+
+    public function setDestinationCountry(string $destinationCountry): self
+    {
+        $this->destinationCountry = $destinationCountry;
+        return $this;
+    }
+
+    public function getDestinationCity(): ?string
+    {
+        return $this->destinationCity;
+    }
+
+    public function setDestinationCity(string $destinationCity): self
+    {
+        $this->destinationCity = $destinationCity;
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): self
+    {
+        $this->description = $description;
         return $this;
     }
 

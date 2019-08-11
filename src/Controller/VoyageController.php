@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Voyage;
 use App\Form\VoyageType;
 use App\Repository\VoyageRepository;
@@ -16,14 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class VoyageController extends AbstractController
 {
     /**
-     * @Route("/", name="voyage_index", methods={"GET"})
+     * @Route("/showAll", name="voyage_all", methods={"GET"})
      */
     public function index(VoyageRepository $voyageRepository): Response
     {
-        $user = $this->getUser();
+        return $this->render('voyage/indexAll.html.twig', [
+            'voyages' => $voyageRepository->findAllNotReserved(),
+        ]);
+    }
+
+    /**
+     * @Route("/", name="voyage_index", methods={"GET"})
+     */
+    public function indexLogged(VoyageRepository $voyageRepository): Response
+    {
         return $this->render('voyage/index.html.twig', [
             'voyages' => $voyageRepository->findAll(),
-            'user' => $user
         ]);
     }
 
@@ -32,7 +41,6 @@ class VoyageController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $user = $this->getUser();
         $voyage = new Voyage();
         $form = $this->createForm(VoyageType::class, $voyage);
         $form->handleRequest($request);
@@ -48,7 +56,6 @@ class VoyageController extends AbstractController
         return $this->render('voyage/new.html.twig', [
             'voyage' => $voyage,
             'form' => $form->createView(),
-            'user' => $user
         ]);
     }
 
@@ -58,6 +65,16 @@ class VoyageController extends AbstractController
     public function show(Voyage $voyage): Response
     {
         return $this->render('voyage/show.html.twig', [
+            'voyage' => $voyage,
+        ]);
+    }
+
+    /**
+     * @Route("/show/{id}", name="voyage_showClient", methods={"GET"})
+     */
+    public function showClient(Voyage $voyage): Response
+    {
+        return $this->render('voyage/showClient.html.twig', [
             'voyage' => $voyage,
         ]);
     }

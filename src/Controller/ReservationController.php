@@ -78,6 +78,7 @@ class ReservationController extends AbstractController
             'reservation' => $reservation,
             'form' => $form->createView(),
             'voyageId' => $id,
+            'clientId' => $reservation->getVoyage() ? $reservation->getVoyage()->getId() : null,
             'user' => $user
         ]);
     }
@@ -101,14 +102,23 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('reservation_index');
+            if (is_null($reservation->getClient()) && empty($_POST['reservation']["clients"]))
+            {
+                $form->addError(new FormError("Veuillez sélectionner un client ou en ajouter un !"));
+            }
+            else
+            {
+                $this->getDoctrine()->getManager()->flush();
+                $this->addFlash("success","Réservation modifiée avec succès !");
+                return $this->redirectToRoute('reservation_index');
+            }
         }
 
         return $this->render('reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
+            'voyageId' => $reservation->getVoyage()->getId(),
+            'clientId' => $reservation->getClient()->getId()
         ]);
     }
 

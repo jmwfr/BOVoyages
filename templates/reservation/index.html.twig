@@ -1,40 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% block title %}{{ parent() }}Réservations{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col my-4">
+            <div class="col mt-3">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h1>Reservation</h1>
+                        <h1>Réservations</h1>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Destination</th>
-                                <th>Date Aller</th>
-                                <th>Date Retour</th>
-                                <th>Nom Client</th>
-                                <th>Email Client</th>
-                                <th>Tel. Client</th>
-                                <th>actions</th>
+                                <th class="text-center">Pays</th>
+                                <th class="text-center">Ville</th>
+                                <th class="text-center">Date Aller</th>
+                                <th class="text-center">Date Retour</th>
+                                <th class="text-center">Nom Client</th>
+                                <th class="text-center">Email Client</th>
+                                <th class="text-center">Tel. Client</th>
+                                <th class="text-center">Nb. Voyageurs</th>
+                                <th class="text-center">actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for reservation in reservations %}
                                 <tr>
-                                    <td>{{ reservation.voyage.destinationVoyage }}</td>
-                                    <td>{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
-                                    <td>{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
-                                    <td>{{ reservation.client.prenomClient }} {{ reservation.client.nomClient }}</td>
-                                    <td>{{ reservation.client.emailClient }}</td>
-                                    <td>{{ reservation.client.telClient }}</td>
+                                    <td class="text-nowrap">{{ reservation.voyage.destinationCountry }}</td>
+                                    <td class="text-nowrap">{{ reservation.voyage.destinationCity }}</td>
+                                    <td class="text-nowrap">{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
+                                    <td class="text-nowrap">{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
+                                    <td class="text-nowrap">{{ reservation.client.prenomClient }} {{ reservation.client.nomClient }}</td>
+                                    <td class="text-nowrap">{{ reservation.client.emailClient }}</td>
+                                    <td class="text-nowrap">{{ reservation.client.telClient }}</td>
+                                    <td class="text-nowrap" >{{ reservation.voyageurs.count }}</td>
                                     <td class="text-nowrap">
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_show', {'id': reservation.id}) }}">Afficher</a>
-                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_edit', {'id': reservation.id}) }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_show', {'id': reservation.id}) }}"><i class="fas fa-search"></i> Afficher</a>
+                                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_edit', {'id': reservation.id}) }}"><i class="fas fa-pencil-alt"></i> Modifier</a>
                                     </td>
                                 </tr>
                             {% else %}
@@ -45,12 +49,11 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="card-footer text-center">
-                    <a class="btn btn-secondary btn-custom" href="{{ path('reservation_new') }}">Nouveau Reservation</a>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-secondary btn-custom" href="{{ path('reservation_new') }}"><i class="fa fa-plus-circle"></i> Nouvelle Réservation</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

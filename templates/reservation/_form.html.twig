@@ -1,16 +1,19 @@
 {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_row(form.voyage, {'value' : voyageId}) }}
-    {{ form_row(form.clients) }}
-    <div class="form-group">
-        <button type="button" id="addClient" class="btn btn-secondary">Ajouter Client</button>
+    {{ form_row(form.voyage, {"selected": voyageId}) }}
+    <hr>
+    {{ form_row(form.clients, {'selected': clientId}) }}
+    <div class="form-group text-center">
+        <button type="button" id="addClient" class="btn btn-secondary">Ajouter Client <i class="fas fa-user-tie"></i></button>
     </div>
     {{ form_row(form.client) }}
+    <hr>
     {{ form_row(form.numCB) }}
     {{ form_row(form.voyageurs) }}
-    <div class="form-group">
-        <button type="button" id="addVoyageur" class="btn btn-secondary">Ajouter Voyageur</button>
+    <div class="form-group text-center">
+        <button type="button" id="addVoyageur" class="btn btn-secondary">Ajouter Voyageur <i class="fas fa-plus-circle"></i></button>
     </div>
     {{ form_rest(form) }}
-    <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+    <hr>
+    <button class="btn btn-secondary btn-custom float-right">{{ button_label|default('Save') }} <i class="fas fa-luggage-cart"></i></button>
 {{ form_end(form) }}
