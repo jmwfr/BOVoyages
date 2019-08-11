@@ -85,4 +85,4 @@ This software is licensed under the MIT license (details [here](LICENSE.md))
     * [ ] Add a customer space page
 
 * All pages
-    * Unformize the page title
+    * [ ] Unformize the page title
