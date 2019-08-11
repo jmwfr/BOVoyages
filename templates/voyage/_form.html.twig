@@ -1,4 +1,13 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {% if not required %}
+    <div class="form-group">
+        <label for="image">Image Actuelle</label>
+        <div class="voyage-image">
+            <img class="w-50 h-auto" src="/img/voyage/{{ voyage.image }}"/>
+        </div>
+    </div>
+    {% endif %}
+    {{ form_row(form.uploadedFile, { 'required': required }) }}
+    {{ form_rest(form) }}
     <button class="btn btn-secondary btn-custom float-right">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

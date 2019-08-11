@@ -76,7 +76,7 @@ This software is licensed under the MIT license (details [here](LICENSE.md))
 ## Known issues and todos
 
 * Travels
-    * [ ] Add image management
+    * [x] Add image management
     
 * Bookings
     * [ ] Fix the automatic selection of the customer when editing

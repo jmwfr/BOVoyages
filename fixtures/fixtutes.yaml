@@ -1,6 +1,27 @@
+App\Entity\User:
+  user_{1..30}:
+    username: <userName()>
+    plainPassword: '123456789'
+    password: '\$2y\$13\$W1LSMG9ZFslPepE/VZDMfOqBhfiKZlmSVadpQGkauCE6iqtkIEc2i'
+    roles: ['ROLE_USER']
+    client: '@client_<current()>'
+  user_31:
+    username: 'root'
+    plainPassword: '123456789'
+    password: '\$2y\$13\$W1LSMG9ZFslPepE/VZDMfOqBhfiKZlmSVadpQGkauCE6iqtkIEc2i'
+    roles: ['ROLE_ADMIN']
+
+App\Entity\Client:
+  client_{1..30}:
+    nomClient: <lastName()>
+    prenomClient: <firstName()>
+    emailClient: <email()>
+    telClient: <e164PhoneNumber()>
+    user: '@user_<current()>'
+
 App\Entity\Voyage:
   voyage{1..100}:
-    image: /img/voyage/voyage<numberBetween(1, 22)>.jpg
+    image: voyage<numberBetween(1, 22)>.jpg
     destinationCountry: <country()>
     destinationCity: <city()>
     description: <sentences(3, true)>
@@ -8,17 +29,3 @@ App\Entity\Voyage:
     dateRetour: <dateTimeBetween('2019-08-07','2021-01-01')>
     nombrePersonnes: <numberBetween(1, 9)>
     prixVoyage: <randomFloat(2, 600.00, 2500.00)>
-
-App\Entity\User:
-  user_1:
-    username: 'root'
-    plainPassword: '123456789'
-    password: '\$2y\$13\$W1LSMG9ZFslPepE/VZDMfOqBhfiKZlmSVadpQGkauCE6iqtkIEc2i'
-    roles: ['ROLE_ADMIN']
-
-App\Entity\Client:
-  client{1..30}:
-    nomClient: <lastName()>
-    prenomClient: <firstName()>
-    emailClient: <email()>
-    telClient: <e164PhoneNumber()>

@@ -18,7 +18,7 @@
                     <div class="card shadow h-100">
                         <div class="card-body">
                             <h2>{{ voyage.destinationCountry }}</h2>
-                            <img src="{{ voyage.image }}" class="my-2"/>
+                            <img src="img/voyage/{{ voyage.image }}" class="my-2"/>
                             <h4>{{ voyage.destinationCity }}</h4>
                             <p>{{ voyage.description }}</p>
                             <p><a class="btn btn-secondary" href="{{ path('voyage_showClient', { id: voyage.id }) }}"

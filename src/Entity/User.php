@@ -37,7 +37,8 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="user", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Client", inversedBy="user")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $client;
 

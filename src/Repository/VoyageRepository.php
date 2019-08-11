@@ -73,4 +73,13 @@ class VoyageRepository extends ServiceEntityRepository
     public function getAlldBuilder() {
         return $this->createQueryBuilder('v');
     }
+
+    public function getImageById(int $id) {
+        return $this->createQueryBuilder('v')
+            ->select('v.image')
+            ->andWhere('v.id = :id')
+            ->setParameter(":id", $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

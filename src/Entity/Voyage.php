@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VoyageRepository")
+ * @Gedmo\Uploadable(path="img/voyage", filenameGenerator="SHA1", appendNumber=true)
  */
 class Voyage
 {
@@ -18,8 +22,15 @@ class Voyage
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Gedmo\UploadableFileName()
      */
     private $image;
+
+    /**
+     * @var UploadedFile
+     * @Assert\File()
+     */
+    private $uploadedFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,8 +68,8 @@ class Voyage
         private $prixVoyage;
 
     /**
- * @ORM\OneToOne(targetEntity="App\Entity\Reservation", inversedBy="voyage", cascade={"persist", "remove"})
- * @ORM\JoinColumn(nullable=true)
+ * @ORM\OneToOne(targetEntity="App\Entity\Reservation", mappedBy="voyage", cascade={"persist", "remove"}, orphanRemoval=true)
+ * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
  */
     private $reservation;
 
@@ -79,6 +90,22 @@ class Voyage
     {
         $this->image = $image;
         return $this;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getUploadedFile(): ?UploadedFile
+    {
+        return $this->uploadedFile;
+    }
+
+    /**
+     * @param UploadedFile $uploadedFile
+     */
+    public function setUploadedFile(UploadedFile $uploadedFile): void
+    {
+        $this->uploadedFile = $uploadedFile;
     }
 
     public function getDestinationCountry(): ?string
