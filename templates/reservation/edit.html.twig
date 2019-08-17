@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Reservation{% endblock %}
+{% block title %}{{ parent() }}Modifier Réservation{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
@@ -21,4 +21,59 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            let clientsDisplay = '{{ clientsDisplay }}';
+            let clientDisplay = '{{ clientDisplay }}';
+
+            $("#reservation_client").attr("style",clientDisplay);
+            $("#reservation_clients").attr("style",clientsDisplay);
+            if(clientDisplay === "display:none")
+            {
+                $('#addClient').html('Sélectionner Client <i class="fas fa-user-tie"></i>');
+            }
+            else
+            {
+                $("#reservation_client").attr("required", "required");
+            }
+
+            let $voyageursCollectionHolder = $("#reservation_voyageurs");
+            let $voyageurTemplate = $voyageursCollectionHolder.data('prototype');
+            let voyageurIndex = $voyageursCollectionHolder.children().length;
+
+            $('#addVoyageur').click(function () {
+                let newVoyageur = $($voyageurTemplate.replace(/__name__/g, voyageurIndex++));
+                newVoyageur.addClass('border-bottom pb-2');
+                let deleteButton = $('<button type="button" class="btn btn-danger float-right delete">Supprimer</button>')
+                newVoyageur.append(deleteButton);
+                $voyageursCollectionHolder.append(newVoyageur);
+            });
+
+            $voyageursCollectionHolder.delegate('.delete', 'click', function () {
+                $(this).parent().remove();
+            })
+
+            $('#addClient').click(function () {
+                if($("#reservation_clients").is(":visible")) {
+                    $("#reservation_client").attr("style","display:block");
+                    $("#reservation_client").attr("required", "required");
+                    $("#reservation_clients").attr("style","display:none");
+                    $("#reservation_clients").find('input').removeAttr("required");
+                    $(this).html('Ajouter Client <i class="fas fa-user-tie"></i>');
+                }
+                else
+                {
+                    $("#reservation_client").attr("style","display:none");
+                    $("#reservation_client").removeAttr("required");
+                    $("#reservation_clients").attr("style","display:block");
+                    $("#reservation_clients").find('input').attr("required", "required");
+                    $("#reservation_clients").find('input').eq(3).removeAttr("required");
+                    $(this).html('Sélectionner Client <i class="fas fa-user-tie"></i>');
+                }
+            })
+        })
+    </script>
 {% endblock %}

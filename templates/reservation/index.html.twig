@@ -28,7 +28,7 @@
                             <tbody>
                             {% for reservation in reservations %}
                                 <tr>
-                                    <td class="text-nowrap">{{ reservation.voyage.destinationCountry }}</td>
+                                    <td>{{ reservation.voyage.destinationCountry }}</td>
                                     <td class="text-nowrap">{{ reservation.voyage.destinationCity }}</td>
                                     <td class="text-nowrap">{{ reservation.voyage.dateAller | date('d/m/Y') }}</td>
                                     <td class="text-nowrap">{{ reservation.voyage.dateRetour | date('d/m/Y') }}</td>
@@ -43,7 +43,7 @@
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="3">no records found</td>
+                                    <td colspan="9">no records found</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

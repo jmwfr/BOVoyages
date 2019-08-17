@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Reservation;
 use App\Entity\Voyageur;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
 use App\Repository\VoyageurRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,42 +37,45 @@ class ReservationController extends AbstractController
      * @Route("/new", name="reservation_new", methods={"GET","POST"})
      * @Route("/new/{id}", name="reservation_new_id", methods={"GET","POST"})
      */
-    public function new(Request $request, string $id = null): Response
+    public function new(Request $request, EntityManagerInterface $em, string $id = null): Response
     {
-        $user = $this->getUser();
-        $entityManager = $this->getDoctrine()->getManager();
         $reservation = new Reservation();
 
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
-
+        $data = null;
+        $showClient = true;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dump($_POST["reservation"]);
-            if (is_null($reservation->getClient()) && empty($_POST['reservation']["clients"]))
+            $data = $_POST['reservation'];
+
+            if (is_null($reservation->getClient()) && is_null($data['clients']))
             {
                 $form->addError(new FormError("Veuillez sélectionner un client ou en ajouter un !"));
             }
+            if(is_null($reservation->getClient()) && (empty($data["clients"]["nomClient"]) || empty($data["clients"]["prenomClient"]) || empty($data["clients"]["emailClient"])))
+            {
+                $form->addError(new FormError("Tous les champs client son obligatoires à l'exception du téléphone !"));
+                $showClient = false;
+            }
+            if(!empty($data["clients"]["nomClient"]) || !empty($data["clients"]["prenomClient"]) || !empty($data["clients"]["emailClient"]))
+            {
+                $showClient = false;
+            }
+            if($reservation->getVoyageurs()->count() == 0) {
+                $form->addError(new FormError("Merci d'ajouter au moins un voyageur !"));
+            }
             else
             {
-                if (is_null($reservation->getClient())) {
-                    $clientId = (int)$_POST['reservation']["clients"];
-                    $repo = $entityManager->getRepository("App\Entity\Client");
-                    $client = $repo->findOneBy(["id" => $clientId]);
-                    $reservation->setClient($client);
+                if (isset($data["clients"]) && (!empty($data["clients"]["nomClient"]) || !empty($data["clients"]["prenomClient"]) || !empty($data["clients"]["emailClient"]))) {
+                    $newClient = $this->createNewClient($data);
+                    $reservation->setClient($newClient);
                 }
 
-                $voyageurs = $reservation->getVoyageurs();
+                $em->persist($reservation);
+                $em->flush();
 
-                foreach ($voyageurs as $voyageur) {
-                    $voyageur->setReservation($reservation);
-                }
-
-                $reservation->getVoyage()->setReservation($reservation);
-
-                $entityManager->persist($reservation);
-                $entityManager->flush();
-
+                $this->addFlash("success","Réservation créée avec succès !");
                 return $this->redirectToRoute('reservation_index');
             }
         }
@@ -77,9 +83,8 @@ class ReservationController extends AbstractController
         return $this->render('reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
-            'voyageId' => $id,
-            'clientId' => $reservation->getVoyage() ? $reservation->getVoyage()->getId() : null,
-            'user' => $user
+            'clientDisplay' => ($showClient) ? 'display:block' : 'display:none',
+            'clientsDisplay' => ($showClient) ? 'display:none' : 'display:block'
         ]);
     }
 
@@ -96,18 +101,32 @@ class ReservationController extends AbstractController
     /**
      * @Route("/{id}/edit", name="reservation_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Reservation $reservation): Response
+    public function edit(Request $request, EntityManagerInterface $em, Reservation $reservation): Response
     {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
+        $data = null;
+        $showClient = true;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (is_null($reservation->getClient()) && empty($_POST['reservation']["clients"]))
+            $data = $_POST['reservation'];
+
+            if (is_null($reservation->getClient()) && is_null($data['clients']))
             {
                 $form->addError(new FormError("Veuillez sélectionner un client ou en ajouter un !"));
             }
+            if(is_null($reservation->getClient()) && (empty($data["clients"]["nomClient"]) || empty($data["clients"]["prenomClient"]) || empty($data["clients"]["emailClient"])))
+            {
+                $form->addError(new FormError("Tous les champs client son obligatoires à l'exception du téléphone !"));
+                $showClient = false;
+            }
             else
             {
+                if (isset($data["clients"])) {
+                    $newClient = $this->createNewClient($data);
+                    $reservation->setClient($newClient);
+                }
+
                 $this->getDoctrine()->getManager()->flush();
                 $this->addFlash("success","Réservation modifiée avec succès !");
                 return $this->redirectToRoute('reservation_index');
@@ -117,8 +136,8 @@ class ReservationController extends AbstractController
         return $this->render('reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
-            'voyageId' => $reservation->getVoyage()->getId(),
-            'clientId' => $reservation->getClient()->getId()
+            'clientDisplay' => ($showClient) ? 'display:block' : 'display:none',
+            'clientsDisplay' => ($showClient) ? 'display:none' : 'display:block'
         ]);
     }
 
@@ -134,5 +153,16 @@ class ReservationController extends AbstractController
         }
 
         return $this->redirectToRoute('reservation_index');
+    }
+
+    private function createNewClient($data) {
+        $newClient = new Client();
+        $newClient->setNomClient($data["clients"]['nomClient']);
+        $newClient->setPrenomClient($data["clients"]['prenomClient']);
+        $newClient->setEmailClient($data["clients"]['emailClient']);
+        if(!empty($data["clients"]['telClient'])) {
+            $newClient->setTelClient($data["clients"]['telClient']);
+        }
+        return $newClient;
     }
 }

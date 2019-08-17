@@ -2,6 +2,11 @@
 
 ## Getting Started
 
+### Introduction
+
+This project has been made during our fullstack developper training.
+it is not a finished product but just a demonstration for educationnal purpose only.
+
 ### Prerequisites
 
 This project is based on Symfony and has external dependencies and uses CDNs so you must be connected to internet in order to make it work.

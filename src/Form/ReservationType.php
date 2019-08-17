@@ -29,24 +29,26 @@ class ReservationType extends AbstractType
                 'choice_value' => "id",
                 'query_builder' => function(VoyageRepository $repo) {
                     return $repo->getAlldBuilder();
-                }
+                },
+                "required" => true,
+                'placeholder' => "Sélectionnez un voyage"
             ])
-            ->add('clients', EntityType::class, [
-                'label' => 'Client',
+            ->add('client', EntityType::class, [
                 'class' => Client::class,
                 'choice_label' => "clientFullName",
                 'choice_value' => "id",
-                'query_builder' => function(ClientRepository $repo){
+                'query_builder' => function(ClientRepository $repo) {
                     return $repo->getBuilderAll();
                 },
-                'mapped' => false,
                 'required' => false,
+                'label' => 'Client',
                 'placeholder' => "Sélectionnez un client"
             ])
-            ->add('client', ClientType::class, [
+            ->add('clients', ClientType::class, [
                 'label' => false,
-                'attr' => ['style' => 'display:none' ],
-                'required' => false
+                'attr' => ['style' => 'display:none'],
+                'required' => false,
+                'mapped' => false
             ])
             ->add('numCB', TextType::class, [
                 'label' => 'Numéro de Carte Bleue'
@@ -57,6 +59,7 @@ class ReservationType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
+                'by_reference' => false,
                 'mapped' => true
             ])
         ;

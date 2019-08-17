@@ -27,6 +27,20 @@
     {{ parent() }}
     <script>
         $(document).ready(function() {
+            let clientsDisplay = '{{ clientsDisplay }}';
+            let clientDisplay = '{{ clientDisplay }}';
+
+            $("#reservation_client").attr("style",clientDisplay);
+            $("#reservation_clients").attr("style",clientsDisplay);
+            if(clientDisplay === "display:none")
+            {
+                $('#addClient').html('Sélectionner Client <i class="fas fa-user-tie"></i>');
+            }
+            else
+            {
+                $("#reservation_client").attr("required", "required");
+            }
+
             let $voyageursCollectionHolder = $("#reservation_voyageurs");
             let $voyageurTemplate = $voyageursCollectionHolder.data('prototype');
             let voyageurIndex = $voyageursCollectionHolder.children().length;
@@ -44,16 +58,21 @@
             })
 
             $('#addClient').click(function () {
-                if($(this).text() === "Ajouter Client") {
+                if($("#reservation_clients").is(":visible")) {
                     $("#reservation_client").attr("style","display:block");
+                    $("#reservation_client").attr("required", "required");
                     $("#reservation_clients").attr("style","display:none");
-                    $(this).text("Sélectionner Client");
+                    $("#reservation_clients").find('input').removeAttr("required");$(this).html('Ajouter Client <i class="fas fa-user-tie"></i>');
                 }
                 else
                 {
                     $("#reservation_client").attr("style","display:none");
+                    $("#reservation_client").removeAttr("required");
                     $("#reservation_clients").attr("style","display:block");
-                    $(this).text("Ajouter Client");
+                    $("#reservation_clients").find('input').attr("required", "required");
+                    $("#reservation_clients").find('input').eq(2).removeAttr("required");
+                    $(this).html('Sélectionner Client <i class="fas fa-user-tie"></i>');
+                    $('#reservation_client').val("");
                 }
             })
         })
