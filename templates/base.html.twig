@@ -1,103 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}BOVoyage | {% endblock %}</title>
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('css/app') }}
-        <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat|Roboto&display=swap" rel="stylesheet">
-    {% endblock %}
-</head>
-<body>
-<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light shadow">
-    <a class="navbar-brand" href="{{ path('home') }}">BOVoyages</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('home') }}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('voyage_all') }}"><i class="fas fa-suitcase"></i> Nos Voyages</a>
-            </li>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.client == null %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownResa" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-atlas"></i> Admin Résevations</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownResa">
-                    <a class="dropdown-item" href="{{ path('reservation_index') }}">Liste Réservations</a>
-                    <a class="dropdown-item" href="{{ path('reservation_new') }}">Créer Réservation</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownVoyage" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-luggage-cart"></i> Admin Voyages</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownVoyage">
-                    <a class="dropdown-item" href="{{ path('voyage_index') }}">Liste Voyages</a>
-                    <a class="dropdown-item" href="{{ path('voyage_new') }}">Ajouter Voyage</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownClient" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> Admin Clients</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownClient">
-                    <a class="dropdown-item" href="{{ path('client_index') }}">Liste Clients</a>
-                    <a class="dropdown-item" href="{{ path('client_new') }}">Ajouter Client</a>
-                </div>
-            </li>
-            {% endif %}
-        </ul>
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="float-right position-absolute" style="right: 15px">
-                <a class="nav-item nav-item-custom" href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% else %}
-            <div class="float-right position-absolute" style="right: 15px">
-                <a class="nav-item nav-item-custom" href="{{ path('user_registration') }}"><i class="fas fa-user-plus"></i> Inscription</a>
-                <a class="nav-item nav-item-custom" href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
-            </div>
-        {%  endif %}
-    </div>
-</nav>
-{% for flashMessage in app.session.flashbag.get('error') %}
-<div class="container-fluid mt-5 flash-message">
-    <div class="bg-danger rounded p-3 text-center text-light flash-success">
-        {{ flashMessage }}
-    </div>
-</div>
-{%  endfor %}
-{% for flashMessage in app.session.flashbag.get('success') %}
-<div class="container-fluid mt-5 flash-message">
-    <div class="rounded p-3 text-center text-light flash-success">
-        {{ flashMessage }}
-    </div>
-</div>
-{%  endfor %}
-<div class="container-fluid body-wrapper">
-    <div class="row">
-        <div class="col">
-            {% block body %}{% endblock %}
-        </div>
-    </div>
-</div>
-<div class="container-fluid pt-3 fixed-bottom bg-light footer">
-    <div class="row justify-content-center">
-        <p><em>Copyright &copy; BOVoyages 2018-2019</em></p>
-    </div>
-</div>
-{% block javascripts %}
-    {{ encore_entry_script_tags('js/app') }}
-    <script src="https://kit.fontawesome.com/6e948aba88.js"></script>
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('.flash-message').hide("fade", {}, 1000);
-            }, 1000);
-        })
-    </script>
-{% endblock %}
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>
