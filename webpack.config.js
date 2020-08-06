@@ -23,7 +23,19 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
+    //.addEntry('app', './assets/js/app.js')
+
+    .addEntry("js/app", [
+		"./node_modules/jquery/dist/jquery.min.js",
+		"./node_modules/bootstrap/dist/js/bootstrap.js",
+		"./node_modules/popper.js/dist/umd/popper.js",
+		"./assets/js/app.js"
+	])
+	.addStyleEntry("css/app", [
+		"./node_modules/bootstrap/dist/css/bootstrap.css",
+		"./assets/css/app.css"
+	])
+
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -64,7 +76,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

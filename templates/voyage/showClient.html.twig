@@ -5,8 +5,7 @@
         <div class="row justify-content-center mt-3">
             <div class="col-8 my-3">
                 <div class="card h-100 shadow">
-                    <div class="card-header text-center voyage-card-header voyage-card-header-single" style="background-image: url('{{ voyage.image }}');">
-
+                    <div class="card-header text-center voyage-card-header voyage-card-header-single" style="background-image: url('../../img/voyage/{{ voyage.image }}');">
                     </div>
                     <div class="card-body">
                         <div class="text-center">
@@ -14,9 +13,9 @@
                             <h4>{{ voyage.destinationCity }}</h4>
                         </div>
                         <hr>
-                        <div><em>Nb. Max. Personnes :</em> <strong>{{ voyage.nombrePersonnes }}</strong></div>
-                        <div><em>Du :</em> <strong>{{ voyage.dateAller | date('d/m/Y') }}</strong> <em>au</em> <strong>{{ voyage.dateRetour | date('d/m/Y') }}</strong> </div>
-                        <div><em>Prix :</em><strong>{{ voyage.prixVoyage }}€</strong></div>
+                        <div><em>Nb. Max. Personnes : </em> <strong>{{ voyage.nombrePersonnes }}</strong></div>
+                        <div><em>Du : </em><strong>{{ voyage.dateAller | date('d/m/Y') }}</strong> <em>au</em> <strong>{{ voyage.dateRetour | date('d/m/Y') }}</strong> </div>
+                        <div><em>Prix : </em><strong>{{ voyage.prixVoyage }}€</strong></div>
                         <hr>
                         <div  class="text-justify">{{ voyage.description }}</div>
                     </div>

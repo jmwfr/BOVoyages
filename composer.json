@@ -16,7 +16,6 @@
         "symfony/security-bundle": "5.0.*",
         "symfony/security-csrf": "5.0.*",
         "symfony/validator": "5.0.*",
-        "symfony/web-server-bundle": "^4.4.9",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "5.0.*"
     },

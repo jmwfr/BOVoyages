@@ -18,26 +18,68 @@ class UserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => "Prénom",
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "autofocus" => null,
+                    "placeholder" => "Prénom",
+                    "class" => "form-control"
+                ],
                 'mapped' => false
             ])
             ->add('lastname', TextType::class, [
                 'label' => "Nom",
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Nom",
+                    "class" => "form-control"
+                ],
                 'mapped' => false
             ])
             ->add('phoneNumber', TextType::class, [
                 'label' => "Tel.",
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Téléphone",
+                    "class" => "form-control"
+                ],
                 'mapped' => false,
                 'required' => false
             ])
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'label' => "Email",
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "E-mail",
+                    "class" => "form-control"
+                ],
                 'mapped' => false
             ])
-            ->add('username', TextType::class)
+            ->add('username', TextType::class, [
+                'label' => "Login",
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Login",
+                    "class" => "form-control"
+                ]
+            ])
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => [
+                    'label' => 'Mot de passe',
+                    'label_attr' => ["class" => "sr-only"],
+                    'attr' => [
+                        "placeholder" => "Mot de passe",
+                        "class" => "form-control"
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Répéter Mdp',
+                    'label_attr' => ["class" => "sr-only"],
+                    'attr' => [
+                        "placeholder" => "Répéter Mdp",
+                        "class" => "form-control"
+                    ]
+                ],
             ))
         ;
     }
