@@ -15,10 +15,20 @@ class VoyageurType extends AbstractType
     {
         $builder
             ->add('nomVoyageur', TextType::class, [
-                'label' => 'Nom Voyageur'
+                'label' => 'Nom Voyageur',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Nom Voyageur",
+                    "class" => "form-control my-3"
+                ]
             ])
             ->add('prenomVoyageur', TextType::class, [
-                'label' => 'Prénom Voyageur'
+                'label' => 'Prénom Voyageur',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Prénom Voyageur",
+                    "class" => "form-control my-3"
+                ]
             ])
         ;
     }

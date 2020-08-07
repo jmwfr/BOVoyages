@@ -84,10 +84,10 @@ This software is licensed under the MIT license (details [here](LICENSE.md))
     * [x] Add image management
     
 * Bookings
-    * [ ] Fix the automatic selection of the customer when editing
+    * [x] Fix the automatic selection of the customer when editing
 
 * Customers
     * [ ] Add a customer space page
 
 * All pages
-    * [ ] Unformize the page title
+    * [x] Unformize the page title

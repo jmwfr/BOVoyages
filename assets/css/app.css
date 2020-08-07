@@ -5,6 +5,10 @@ body {
     padding-top: 100px;
 }
 
+label {
+    margin-left: 3px;
+}
+
 .body-wrapper {
     margin-bottom: 90px!important;
 }

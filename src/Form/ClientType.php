@@ -15,14 +15,40 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('nomClient', TextType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Nom Client',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Nom Client",
+                    "class" => "form-control mb-3"
+                ]
             ])
             ->add('prenomClient', TextType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'Prénom Client',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Prénom Client",
+                    "class" => "form-control mb-3"
+                ]
             ])
-            ->add('telClient')
+            ->add('telClient', TextType::class, [
+                'required' => true,
+                'label' => 'Téléphone Client',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Téléphone Client",
+                    "class" => "form-control mb-3"
+                ]
+            ])
             ->add('emailClient', EmailType::class, [
-                'required' => true
+                'required' => true,
+                'label' => 'E-mail Client',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "E-mail Client",
+                    "class" => "form-control"
+                ]
             ])
         ;
     }

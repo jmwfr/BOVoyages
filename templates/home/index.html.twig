@@ -16,13 +16,13 @@
             {% for voyage in voyages %}
                 <div class="col-md-4 text-center my-3">
                     <div class="card shadow h-100">
-                        <div class="card-body">
-                            <h2>{{ voyage.destinationCountry }}</h2>
-                            <img src="img/voyage/{{ voyage.image }}" class="my-2"/>
-                            <h4>{{ voyage.destinationCity }}</h4>
-                            <p>{{ voyage.description }}</p>
-                            <p><a class="btn btn-secondary" href="{{ path('voyage_showClient', { id: voyage.id }) }}"
-                                  role="button">Voir details &raquo;</a></p>
+                        <div class="card-body d-flex flex-column align-items-stretch">
+                            <div><h2>{{ voyage.destinationCountry }}</h2></div>
+                            <div><img src="img/voyage/{{ voyage.image }}" class="my-2"/></div>
+                            <div><h4>{{ voyage.destinationCity }}</h4></div>
+                            <div><p>{{ voyage.description }}</p></div>
+                            <div class="flex-grow-1 d-flex flex-row align-items-end justify-content-center"><a class="btn btn-secondary position-relative" href="{{ path('voyage_showClient', { id: voyage.id }) }}"
+                                  role="button">Voir details &raquo;</a></div>
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,8 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('voyage', EntityType::class, [
+                'label' => "Voyage",
+                'label_attr' => ["class" => "sr-only"],
                 'class' => Voyage::class,
                 'choice_label' => function($voyage) {
                     return $voyage->getDestinationCountry()." (".$voyage->getDestinationCity().")";
@@ -31,9 +33,14 @@ class ReservationType extends AbstractType
                     return $repo->getAlldBuilder();
                 },
                 "required" => true,
-                'placeholder' => "Sélectionnez un voyage"
+                'placeholder' => "Sélectionnez un voyage",
+                'attr' => [
+                    "class" => "form-control"
+                ]
             ])
             ->add('client', EntityType::class, [
+                'label' => "Client",
+                'label_attr' => ["class" => "sr-only"],
                 'class' => Client::class,
                 'choice_label' => "clientFullName",
                 'choice_value' => "id",
@@ -42,7 +49,10 @@ class ReservationType extends AbstractType
                 },
                 'required' => false,
                 'label' => 'Client',
-                'placeholder' => "Sélectionnez un client"
+                'placeholder' => "Sélectionnez un client",
+                'attr' => [
+                    "class" => "form-control"
+                ]
             ])
             ->add('clients', ClientType::class, [
                 'label' => false,
@@ -51,7 +61,12 @@ class ReservationType extends AbstractType
                 'mapped' => false
             ])
             ->add('numCB', TextType::class, [
-                'label' => 'Numéro de Carte Bleue'
+                'label' => 'Numéro de Carte Bleue',
+                'label_attr' => ["class" => "sr-only"],
+                'attr' => [
+                    "placeholder" => "Numéro de Carte Bleue",
+                    "class" => "form-control"
+                ]
             ])
             ->add('voyageurs', CollectionType::class, [
                 'entry_options' => ['label' => false],
