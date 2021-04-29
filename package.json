@@ -1,12 +1,12 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.30.0",
-        "bootstrap": "^4.5.1",
-        "core-js": "^3.0.0",
-        "jquery": "^3.5.1",
+        "bootstrap": "^4.6.0",
+        "core-js": "^3.11.1",
+        "jquery": "^3.6.0",
         "popper.js": "^1.16.1",
         "regenerator-runtime": "^0.13.2",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.13.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -15,5 +15,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "y18n": "4.0.1"
     }
 }
