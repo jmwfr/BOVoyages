@@ -17,7 +17,7 @@ class HomeController extends AbstractController
     public function index(VoyageRepository $voyageRepository)
     {
         $voyages = $voyageRepository->findLastTwelveNotReserved();
-        dump($voyages);
+        //dump($voyages);
         return $this->render('home/index.html.twig', [
             'voyages' => $voyages
         ]);

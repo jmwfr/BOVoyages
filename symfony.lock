@@ -29,6 +29,9 @@
     "doctrine/dbal": {
         "version": "v2.9.2"
     },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.0",
         "recipe": {
@@ -107,6 +110,9 @@
         "files": [
             "./config/packages/dev/easy_log_handler.yaml"
         ]
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
     },
     "fzaninotto/faker": {
         "version": "v1.8.0"
@@ -253,6 +259,9 @@
     "symfony/dependency-injection": {
         "version": "v4.3.3"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.4.0"
+    },
     "symfony/doctrine-bridge": {
         "version": "v4.3.3"
     },
@@ -309,6 +318,9 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client-contracts": {
+        "version": "v2.4.0"
+    },
     "symfony/http-foundation": {
         "version": "v4.3.3"
     },
@@ -357,6 +369,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.6"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.22.1"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.12.0"
     },
@@ -383,6 +398,9 @@
     },
     "symfony/property-access": {
         "version": "v4.3.3"
+    },
+    "symfony/property-info": {
+        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "4.2",
@@ -427,6 +445,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.3.3"
+    },
+    "symfony/string": {
+        "version": "v5.2.6"
     },
     "symfony/translation-contracts": {
         "version": "v1.1.5"
